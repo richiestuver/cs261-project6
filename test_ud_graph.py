@@ -92,8 +92,14 @@ class TestRemoveVertex(unittest.TestCase):
 
 class TestGetVertices(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [[],
+                    sorted(['A', 'B', 'C', 'D', 'E'])]
         results = []
+
+        g = UndirectedGraph()
+        results.append(g.get_vertices())
+        g = UndirectedGraph(['AB', 'AC', 'BC', 'BD', 'CD', 'CE'])
+        results.append(g.get_vertices())
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):
@@ -102,8 +108,14 @@ class TestGetVertices(unittest.TestCase):
 
 class TestGetEdges(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [[],
+                    sorted([('A', 'B'), ('A', 'C'), ('B', 'C'), ('B', 'D'), ('C', 'D'), ('C', 'E')])]
         results = []
+
+        g = UndirectedGraph()
+        results.append(g.get_edges())
+        g = UndirectedGraph(['AB', 'AC', 'BC', 'BD', 'CD', 'CE'])
+        results.append(g.get_edges())
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):

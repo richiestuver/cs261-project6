@@ -81,7 +81,6 @@ class UndirectedGraph:
                 self.adj_list[u].remove(v)
             except ValueError:
                 return
-        
 
     def remove_vertex(self, v: str) -> None:
         """
@@ -94,13 +93,13 @@ class UndirectedGraph:
             del self.adj_list[v]
         except KeyError:
             return
-        
 
     def get_vertices(self) -> []:
         """
         Return list of vertices in the graph (any order)
         """
        
+        return list(self.adj_list)
 
     def get_edges(self) -> []:
         """
