@@ -25,9 +25,21 @@ class TestAddVertex(unittest.TestCase):
 
 
 class TestAddEdge(unittest.TestCase):
-    def test_something(self):
-        expected = []
+    def test_add_edge(self):
+        expected = ["""GRAPH: {
+  A: ['B', 'C']
+  B: ['A', 'C', 'D']
+  C: ['A', 'B', 'D', 'E']
+  D: ['B', 'C', 'E']
+  E: ['C', 'D']}"""]
         results = []
+
+        g = UndirectedGraph()
+
+        for u, v in ['AB', 'AC', 'BC', 'BD', 'CD', 'CE', 'DE', ('B', 'C')]:
+            g.add_edge(u, v)
+
+        results.append(str(g))
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):
