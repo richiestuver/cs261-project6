@@ -48,8 +48,18 @@ class TestAddEdge(unittest.TestCase):
 
 class TestRemoveVertex(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = ["""GRAPH: {
+  A: ['C']
+  B: ['C', 'D']
+  C: ['A', 'B', 'D', 'E']
+  D: ['B', 'C', 'E']
+  E: ['C', 'D']}"""]
         results = []
+
+        g = UndirectedGraph(['AB', 'AC', 'BC', 'BD', 'CD', 'CE', 'DE'])
+        g.remove_edge('A', 'B')
+        g.remove_edge('X', 'B')
+        results.append(str(g))
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):

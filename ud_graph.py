@@ -64,12 +64,23 @@ class UndirectedGraph:
 
             if v not in self.adj_list[u]:
                 self.adj_list[u].append(v)
-        
 
     def remove_edge(self, v: str, u: str) -> None:
         """
         Remove edge from the graph
         """
+
+        if v in self.adj_list and u in self.adj_list:
+
+            try:
+                self.adj_list[v].remove(u)
+            except ValueError:
+                return
+
+            try:
+                self.adj_list[u].remove(v)
+            except ValueError:
+                return
         
 
     def remove_vertex(self, v: str) -> None:
