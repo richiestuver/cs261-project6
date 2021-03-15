@@ -46,7 +46,7 @@ class TestAddEdge(unittest.TestCase):
                 self.assertEqual(expected[i], results[i])
 
 
-class TestRemoveVertex(unittest.TestCase):
+class TestRemoveEdge(unittest.TestCase):
     def test_something(self):
         expected = ["""GRAPH: {
   A: ['C']
@@ -66,10 +66,24 @@ class TestRemoveVertex(unittest.TestCase):
                 self.assertEqual(expected[i], results[i])
 
 
-class TestRemoveEdge(unittest.TestCase):
+class TestRemoveVertex(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = ["""GRAPH: {
+  A: ['C']
+  B: ['C', 'D']
+  C: ['A', 'B', 'D', 'E']
+  D: ['B', 'C', 'E']
+  E: ['C', 'D']}""",
+                    "GRAPH: {A: ['C'], B: ['C'], C: ['A', 'B', 'E'], E: ['C']}"]
         results = []
+
+        g = UndirectedGraph(['AB', 'AC', 'BC', 'BD', 'CD', 'CE', 'DE'])
+        g.remove_vertex('DOES NOT EXIST')
+        g.remove_edge('A', 'B')
+        g.remove_edge('X', 'B')
+        results.append(str(g))
+        g.remove_vertex('D')
+        results.append(str(g))
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):

@@ -87,6 +87,13 @@ class UndirectedGraph:
         """
         Remove vertex and all connected edges
         """
+
+        try:
+            for u in self.adj_list[v][:]:  # create a shallow copy of list. darn mutable sequence, Python!
+                self.remove_edge(v, u)
+            del self.adj_list[v]
+        except KeyError:
+            return
         
 
     def get_vertices(self) -> []:
