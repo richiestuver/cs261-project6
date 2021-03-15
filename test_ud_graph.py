@@ -4,8 +4,20 @@ from ud_graph import *
 
 class TestAddVertex(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = ['GRAPH: {}',
+                    'GRAPH: {A: [], B: [], C: [], D: [], E: []}',
+                    'GRAPH: {A: [], B: [], C: [], D: [], E: []}']
         results = []
+
+        g = UndirectedGraph()
+        results.append(str(g))
+
+        for v in 'ABCDE':
+            g.add_vertex(v)
+        results.append(str(g))
+
+        g.add_vertex('A')
+        results.append(str(g))
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):

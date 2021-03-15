@@ -44,7 +44,9 @@ class UndirectedGraph:
         """
         Add new vertex to the graph
         """
-        
+
+        self.adj_list[v] = []
+
     def add_edge(self, u: str, v: str) -> None:
         """
         Add edge to the graph
