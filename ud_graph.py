@@ -131,11 +131,9 @@ class UndirectedGraph:
         while len(deq) > 0:
             vertex = deq.popleft()
             if vertex in vertices:
-                try:
+                if len(deq) > 0:
                     if deq[0] not in self.adj_list[vertex]:
                         return False
-                except IndexError:
-                    continue
             else:
                 return False
 
