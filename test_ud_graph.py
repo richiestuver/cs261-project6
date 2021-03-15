@@ -124,12 +124,23 @@ class TestGetEdges(unittest.TestCase):
 
 class TestIsValidPath(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [(['A', 'B', 'C'], True),
+                    (['A', 'D', 'E'], False),
+                    (['E', 'C', 'A', 'B', 'D', 'C', 'B', 'E'], False),
+                    (['A', 'C', 'D', 'E', 'C', 'B'], True),
+                    ([], True),
+                    (['D'], True),
+                    (['Z'], False)]
         results = []
 
+        g = UndirectedGraph(['AB', 'AC', 'BC', 'BD', 'CD', 'CE', 'DE'])
+        test_cases = ['ABC', 'ADE', 'ECABDCBE', 'ACDECB', '', 'D', 'Z']
+        for path in test_cases:
+            results.append(g.is_valid_path(list(path)))
+
         for i in range(len(expected)):
-            with self.subTest(expected[i]):
-                self.assertEqual(expected[i], results[i])
+            with self.subTest(expected[i][0]):
+                self.assertEqual(expected[i][1], results[i])
 
 
 class TestDFS(unittest.TestCase):

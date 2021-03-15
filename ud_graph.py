@@ -1,7 +1,10 @@
-# Course: 
-# Author: 
-# Assignment: 
-# Description:
+# Course:  261 Data Structures
+# Author:  Richie Stuver
+# Assignment: Project 6
+# Description: Implement Undirected Graph
+
+import heapq
+from collections import deque
 
 
 class UndirectedGraph:
@@ -116,13 +119,37 @@ class UndirectedGraph:
             edges_tuples.append(tuple(sorted(e)))
 
         return sorted(edges_tuples)
-        
 
     def is_valid_path(self, path: []) -> bool:
         """
         Return true if provided path is valid, False otherwise
         """
-       
+
+        vertices = self.get_vertices()
+        deq = deque(path)
+
+        while len(deq) > 0:
+            vertex = deq.popleft()
+            if vertex in vertices:
+                try:
+                    if deq[0] not in self.adj_list[vertex]:
+                        return False
+                except IndexError:
+                    continue
+            else:
+                return False
+
+        return True
+
+        # while len(deq) > 0:
+        #     vertex = deq.popleft()
+        #     try:
+        #         if vertex not in vertices or deq[0] not in self.adj_list[vertex]:
+        #             return False
+        #     except IndexError:
+        #         return False
+
+        return True
 
     def dfs(self, v_start, v_end=None) -> []:
         """
