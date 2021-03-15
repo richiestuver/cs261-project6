@@ -105,6 +105,17 @@ class UndirectedGraph:
         """
         Return list of edges in the graph (any order)
         """
+
+        edges_sets = set()
+        for v in self.adj_list:
+            for u in self.adj_list[v]:
+                edges_sets.add(frozenset([v, u]))
+
+        edges_tuples = []
+        for e in edges_sets:
+            edges_tuples.append(tuple(sorted(e)))
+
+        return sorted(edges_tuples)
         
 
     def is_valid_path(self, path: []) -> bool:
