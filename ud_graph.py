@@ -198,20 +198,12 @@ class UndirectedGraph:
         visited = set()
         connected_components = []
         for v in self.adj_list:
-            if len(connected_components) == 0:
-                component = self.bfs(v)
+            if len(connected_components) == 0 or v not in visited:
+                component = set(self.bfs(v))
                 connected_components.append(component)
-                visited = visited.union(set(component))
-
-            else:
-                if v not in visited:
-                    component = self.bfs(v)
-                    connected_components.append(component)
-                    visited = visited.union(set(component))
+                visited = visited | component
 
         return len(connected_components)
-
-
 
     def has_cycle(self):
         """
