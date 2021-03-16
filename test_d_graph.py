@@ -61,9 +61,6 @@ class TestRemoveEdge(unittest.TestCase):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
 
-        self.assertEqual(True, False)
-
-
 class TestGetVertices(unittest.TestCase):
     def test_something(self):
         expected = [[],
