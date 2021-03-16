@@ -198,8 +198,21 @@ class TestBFS(unittest.TestCase):
 
 class TestCountConnected(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [1, 2, 3, 4, 4, 5, 5, 5, 6, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 2]
         results = []
+
+        edges = ['AE', 'AC', 'BE', 'CE', 'CD', 'CB', 'BD', 'ED', 'BH', 'QG', 'FG']
+        g = UndirectedGraph(edges)
+        test_cases = (
+            'add QH', 'remove FG', 'remove GQ', 'remove HQ',
+            'remove AE', 'remove CA', 'remove EB', 'remove CE', 'remove DE',
+            'remove BC', 'add EA', 'add EF', 'add GQ', 'add AC', 'add DQ',
+            'add EG', 'add QH', 'remove CD', 'remove BD', 'remove QG')
+        for case in test_cases:
+            command, edge = case.split()
+            u, v = edge
+            g.add_edge(u, v) if command == 'add' else g.remove_edge(u, v)
+            results.append(g.count_connected_components())
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):

@@ -189,7 +189,29 @@ class UndirectedGraph:
         """
         Return number of connected componets in the graph
         """
-      
+
+        # iterate through all vertices
+        # if not already ina connected component, run a BFS and generate a connected component
+        # return length of list of connected components
+        # if in a connected component, move on to the next neode
+
+        visited = set()
+        connected_components = []
+        for v in self.adj_list:
+            if len(connected_components) == 0:
+                component = self.bfs(v)
+                connected_components.append(component)
+                visited = visited.union(set(component))
+
+            else:
+                if v not in visited:
+                    component = self.bfs(v)
+                    connected_components.append(component)
+                    visited = visited.union(set(component))
+
+        return len(connected_components)
+
+
 
     def has_cycle(self):
         """
