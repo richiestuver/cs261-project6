@@ -185,15 +185,10 @@ class UndirectedGraph:
 
         return visited
 
-    def count_connected_components(self):
+    def get_connected_components(self):
         """
-        Return number of connected componets in the graph
+        Return a list of connected components (sets)
         """
-
-        # iterate through all vertices
-        # if not already ina connected component, run a BFS and generate a connected component
-        # return length of list of connected components
-        # if in a connected component, move on to the next neode
 
         visited = set()
         connected_components = []
@@ -203,15 +198,31 @@ class UndirectedGraph:
                 connected_components.append(component)
                 visited = visited | component
 
-        return len(connected_components)
+        return connected_components
+
+    def count_connected_components(self):
+        """
+        Return number of connected componets in the graph
+        """
+
+        return len(self.get_connected_components())
 
     def has_cycle(self):
         """
         Return True if graph contains a cycle, False otherwise
         """
 
+        components = self.get_connected_components()
+        for c in components:
+            edges = set()
+            for v in c:
+                for u in self.adj_list[v]:
+                    edges.add(frozenset([u, v]))
 
-   
+            if len(edges) != len(c) - 1:
+                return True
+
+        return False
 
 
 if __name__ == '__main__':
