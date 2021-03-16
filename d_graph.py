@@ -233,8 +233,7 @@ class DirectedGraph:
 
                 for u in range(len(self.adj_matrix[val])):
                     if u != src and self.adj_matrix[val][u] != 0:
-                        new_dist = dist + self.adj_matrix[val][u]
-                        heapq.heappush(heap, [new_dist, u])
+                        heapq.heappush(heap, [dist + self.adj_matrix[val][u], u])
 
         shortest_paths = [_ for _ in visited.values()]
         return shortest_paths
