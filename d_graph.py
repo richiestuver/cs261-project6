@@ -215,10 +215,29 @@ class DirectedGraph:
 
     def dijkstra(self, src: int) -> []:
         """
-        TODO: Write this implementation
+        Return list of shortest paths from src to each other node in the graph.
         """
-        pass
 
+        visited = {_: float('inf') for _ in range(self.v_count)}
+        heap = []
+
+        heapq.heappush(heap, [0, src])
+
+        while len(heap) > 0:
+            v = heapq.heappop(heap)
+            dist = v[0]
+            val = v[1]
+
+            if dist < visited[val]:
+                visited[val] = dist
+
+                for u in range(len(self.adj_matrix[val])):
+                    if u != src and self.adj_matrix[val][u] != 0:
+                        new_dist = dist + self.adj_matrix[val][u]
+                        heapq.heappush(heap, [new_dist, u])
+
+        shortest_paths = [_ for _ in visited.values()]
+        return shortest_paths
 
 if __name__ == '__main__':
 

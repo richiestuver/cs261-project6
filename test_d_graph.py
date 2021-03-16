@@ -188,15 +188,32 @@ class TestHasCycle(unittest.TestCase):
 
 class TestDijkstra(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [[0, 10, 35, 28, 25],
+                    [27, 0, 25, 18, 15],
+                    [50, 23, 0, 41, 38],
+                    [32, 5, 7, 0, 20],
+                    [12, 8, 10, 3, 0],
+                    [0, 10, float('inf'), float('inf'), 25],
+                    [27, 0, float('inf'), float('inf'), 15],
+                    [50, 23, 0, float('inf'), 38],
+                    [32, 5, 7, 0, 20],
+                    [12, 22, float('inf'), float('inf'), 0]]
         results = []
+
+        edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+                 (3, 1, 5), (2, 1, 23), (3, 2, 7)]
+        g = DirectedGraph(edges)
+        for i in range(5):
+            results.append(g.dijkstra(i))
+
+        g.remove_edge(4, 3)
+
+        for i in range(5):
+            results.append(g.dijkstra(i))
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
-
-        self.assertEqual(True, False)
-
 
 if __name__ == '__main__':
     unittest.main()
