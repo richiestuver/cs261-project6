@@ -66,26 +66,38 @@ class TestRemoveEdge(unittest.TestCase):
 
 class TestGetVertices(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [[],
+                    [0, 1, 2, 3, 4]]
         results = []
+
+        g = DirectedGraph()
+        results.append(g.get_vertices())
+        edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+                 (3, 1, 5), (2, 1, 23), (3, 2, 7)]
+        g = DirectedGraph(edges)
+        results.append(g.get_vertices())
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
-
-        self.assertEqual(True, False)
 
 
 class TestGetEdges(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [[],
+                    [(0, 1, 10), (1, 4, 15), (2, 1, 23), (3, 1, 5), (3, 2, 7), (4, 0, 12), (4, 3, 3)]]
         results = []
+
+        g = DirectedGraph()
+        results.append(g.get_edges())
+        edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+                 (3, 1, 5), (2, 1, 23), (3, 2, 7)]
+        g = DirectedGraph(edges)
+        results.append(g.get_edges())
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
-
-        self.assertEqual(True, False)
 
 
 class TestIsValidPath(unittest.TestCase):

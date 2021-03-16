@@ -79,15 +79,17 @@ class DirectedGraph:
 
     def remove_edge(self, src: int, dst: int) -> None:
         """
-        TODO: Write this implementation
+        Remove edge between indicated nodes
         """
-        pass
+
+        self.add_edge(src, dst, 0)
 
     def get_vertices(self) -> []:
         """
-        TODO: Write this implementation
+        Return list of vertices
         """
-        pass
+
+        return [x for x in range(self.v_count)]
 
     def get_edges(self) -> []:
         """
