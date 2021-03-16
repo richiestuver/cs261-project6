@@ -64,9 +64,18 @@ class DirectedGraph:
 
     def add_edge(self, src: int, dst: int, weight=1) -> None:
         """
-        TODO: Write this implementation
+        adds a new edge to the graph, connecting two vertices with provided indices. Do nothing if:
+            - either (or both) vertex indices do not exist in the graph
+            - the weight is not a positive integer
+            - both vertices refer to the same vertex.
+        If an edge already exists in the graph, the method will update its weight.
         """
-        pass
+
+        if weight > 0 and src != dst:
+            try:
+                self.adj_matrix[src][dst] = weight
+            except IndexError:
+                return
 
     def remove_edge(self, src: int, dst: int) -> None:
         """

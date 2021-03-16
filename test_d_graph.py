@@ -26,19 +26,30 @@ class TestAddVertex(unittest.TestCase):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
 
-        self.assertEqual(True, False)
-
-
 class TestAddEdge(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = ["""GRAPH (5 vertices):
+   | 0  1  2  3  4
+------------------
+ 0 | 0 10  0  0  0
+ 1 | 0  0  0  0 15
+ 2 | 0 23  0  0  0
+ 3 | 0  5  7  0  0
+ 4 |12  0  0  3  0
+"""]
         results = []
 
+        g = DirectedGraph()
+        for _ in range(5):
+            g.add_vertex()
+        edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+                 (3, 1, 5), (2, 1, 23), (3, 2, 7)]
+        for src, dst, weight in edges:
+            g.add_edge(src, dst, weight)
+        results.append(str(g))
         for i in range(len(expected)):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
-
-        self.assertEqual(True, False)
 
 
 class TestRemoveEdge(unittest.TestCase):
