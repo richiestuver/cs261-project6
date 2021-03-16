@@ -1,10 +1,26 @@
 import unittest
+from d_graph import *
 
 
 class TestAddVertex(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = ['EMPTY GRAPH\n',
+                    """GRAPH (5 vertices):
+   | 0  1  2  3  4
+------------------
+ 0 | 0  0  0  0  0
+ 1 | 0  0  0  0  0
+ 2 | 0  0  0  0  0
+ 3 | 0  0  0  0  0
+ 4 | 0  0  0  0  0
+"""]
         results = []
+
+        g = DirectedGraph()
+        results.append(str(g))
+        for _ in range(5):
+            g.add_vertex()
+        results.append(str(g))
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):

@@ -52,9 +52,15 @@ class DirectedGraph:
 
     def add_vertex(self) -> int:
         """
-        TODO: Write this implementation
+        Add a vertex to the graph and return the new number of vertices in the graph
         """
-        pass
+
+        self.adj_matrix.append([0 for _ in range(self.v_count)])
+        for row in self.adj_matrix:
+            row.append(0)
+
+        self.v_count += 1
+        return self.v_count
 
     def add_edge(self, src: int, dst: int, weight=1) -> None:
         """
