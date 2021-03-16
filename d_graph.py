@@ -144,12 +144,29 @@ class DirectedGraph:
 
         return visited
 
-
     def bfs(self, v_start, v_end=None) -> []:
         """
-        TODO: Write this implementation
+        performs a breadth-first search (BFS) in the graph and returns a list of vertices
+        visited during the search, in the order they were visited
         """
-        pass
+
+        visited = []
+        queue = deque()
+
+        queue.append(v_start)
+
+        while len(queue) > 0:
+            v = queue.popleft()
+            if v == v_end:
+                break
+
+            if v not in visited:
+                visited.append(v)
+                for u in range(len(self.adj_matrix[v])):
+                    if self.adj_matrix[v][u] != 0:
+                        queue.append(u)
+
+        return visited
 
     def has_cycle(self):
         """
