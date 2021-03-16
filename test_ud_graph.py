@@ -221,11 +221,31 @@ class TestCountConnected(unittest.TestCase):
 
 class TestHasCycle(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [True, True, True, True, True, True, True, True, True,
+                    False, False, False, False, False, False,
+                    True, True, True,
+                    False, False,
+                    True, False]
         results = []
+        labels = []
+
+        edges = ['AE', 'AC', 'BE', 'CE', 'CD', 'CB', 'BD', 'ED', 'BH', 'QG', 'FG']
+        g = UndirectedGraph(edges)
+        test_cases = (
+            'add QH', 'remove FG', 'remove GQ', 'remove HQ',
+            'remove AE', 'remove CA', 'remove EB', 'remove CE', 'remove DE',
+            'remove BC', 'add EA', 'add EF', 'add GQ', 'add AC', 'add DQ',
+            'add EG', 'add QH', 'remove CD', 'remove BD', 'remove QG',
+            'add FG', 'remove GE')
+        for case in test_cases:
+            command, edge = case.split()
+            u, v = edge
+            g.add_edge(u, v) if command == 'add' else g.remove_edge(u, v)
+            labels.append('{:<10}'.format(case))
+            results.append(g.has_cycle())
 
         for i in range(len(expected)):
-            with self.subTest(expected[i]):
+            with self.subTest(labels[i]):
                 self.assertEqual(expected[i], results[i])
 
 if __name__ == '__main__':
