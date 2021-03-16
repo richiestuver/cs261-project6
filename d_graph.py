@@ -122,9 +122,28 @@ class DirectedGraph:
 
     def dfs(self, v_start, v_end=None) -> []:
         """
-        TODO: Write this implementation
+        performs a depth-first search (DFS) in the graph and returns a list of vertices
+        visited during the search, in the order they were visited
         """
-        pass
+
+        visited = []
+        stack = deque()
+
+        stack.append(v_start)
+
+        while len(stack) > 0:
+            v = stack.pop()
+            if v == v_end:
+                break
+
+            if v not in visited:
+                visited.append(v)
+                for u in range(len(self.adj_matrix[v])-1, -1, -1):
+                    if self.adj_matrix[v][u] != 0:
+                        stack.append(u)
+
+        return visited
+
 
     def bfs(self, v_start, v_end=None) -> []:
         """

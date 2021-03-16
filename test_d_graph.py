@@ -121,26 +121,42 @@ class TestIsValidPath(unittest.TestCase):
 
 class TestDFS(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [[0, 1, 4, 3, 2],
+                    [1, 4, 0, 3, 2],
+                    [2, 1, 4, 0, 3],
+                    [3, 1, 4, 0, 2],
+                    [4, 0, 1, 3, 2]]
         results = []
+
+        edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+                 (3, 1, 5), (2, 1, 23), (3, 2, 7)]
+        g = DirectedGraph(edges)
+        for start in range(5):
+            results.append(g.dfs(start))
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
-
-        self.assertEqual(True, False)
 
 
 class TestBFS(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [[0, 1, 4, 3, 2],
+                    [1, 4, 0, 3, 2],
+                    [2, 1, 4, 0, 3],
+                    [3, 1, 2, 4, 0],
+                    [4, 0, 3, 1, 2]]
         results = []
+
+        edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+                 (3, 1, 5), (2, 1, 23), (3, 2, 7)]
+        g = DirectedGraph(edges)
+        for start in range(5):
+            results.append(g.bfs(start))
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
-
-        self.assertEqual(True, False)
 
 
 class TestHasCycle(unittest.TestCase):
