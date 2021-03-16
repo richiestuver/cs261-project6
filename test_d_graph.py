@@ -102,14 +102,21 @@ class TestGetEdges(unittest.TestCase):
 
 class TestIsValidPath(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [True, False, False, True, True, True]
         results = []
+        labels = []
+
+        edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+                 (3, 1, 5), (2, 1, 23), (3, 2, 7)]
+        g = DirectedGraph(edges)
+        test_cases = [[0, 1, 4, 3], [1, 3, 2, 1], [0, 4], [4, 0], [], [2]]
+        for path in test_cases:
+            labels.append(path)
+            results.append(g.is_valid_path(path))
 
         for i in range(len(expected)):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
-
-        self.assertEqual(True, False)
 
 
 class TestDFS(unittest.TestCase):

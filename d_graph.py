@@ -1,7 +1,10 @@
 # Course: CS261 - Data Structures
-# Author:
-# Assignment:
-# Description:
+# Author: Richie Stuver
+# Assignment: Project 6
+# Description: Implement Directed Graph
+
+import heapq
+from collections import deque
 
 class DirectedGraph:
     """
@@ -104,9 +107,18 @@ class DirectedGraph:
 
     def is_valid_path(self, path: []) -> bool:
         """
-        TODO: Write this implementation
+        takes a list of vertex indices and returns True if the sequence of vertices represents a valid path in the graph
         """
-        pass
+
+        vertices = self.get_vertices()
+        deq = deque(path)
+
+        while len(deq) > 0:
+            src = deq.popleft()
+            if src not in vertices or (len(deq) > 0 and self.adj_matrix[src][deq[0]] == 0):
+                return False
+
+        return True
 
     def dfs(self, v_start, v_end=None) -> []:
         """
