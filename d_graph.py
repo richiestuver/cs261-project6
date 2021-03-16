@@ -74,7 +74,7 @@ class DirectedGraph:
         If an edge already exists in the graph, the method will update its weight.
         """
 
-        if weight > 0 and src != dst:
+        if src != dst:
             try:
                 self.adj_matrix[src][dst] = weight
             except IndexError:
@@ -168,11 +168,50 @@ class DirectedGraph:
 
         return visited
 
+    def get_connected_components(self):
+        """
+        Return a list of connected components (sets)
+        """
+
+        visited = set()
+        connected_components = []
+        for src in range(len(self.adj_matrix)):
+            if len(connected_components) == 0 or src not in visited:
+                component = set(self.bfs(src))
+                connected_components.append(component)
+                visited = visited | component
+
+        return connected_components
+
     def has_cycle(self):
         """
-        TODO: Write this implementation
+        returns True if there is at least one cycle in the graph. If the graph is acyclic,
+        the method returns False
         """
-        pass
+
+        components = self.get_connected_components()
+
+        for c in components:
+            visited = []
+            stack = deque()
+
+            vertex = c.pop()
+            c.add(vertex)
+
+            stack.append(vertex)
+
+            while len(stack) > 0:
+                v = stack.pop()
+
+                visited.append(v)
+                for u in c:
+                    if self.adj_matrix[v][u] != 0:
+                        if u not in visited:
+                            stack.append(u)
+                        else:
+                            return True
+
+        return False
 
     def dijkstra(self, src: int) -> []:
         """

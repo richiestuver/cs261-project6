@@ -161,14 +161,29 @@ class TestBFS(unittest.TestCase):
 
 class TestHasCycle(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [True, True, False, False, False, False, True]
         results = []
+        labels = []
+
+        edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+                 (3, 1, 5), (2, 1, 23), (3, 2, 7)]
+        g = DirectedGraph(edges)
+
+        edges_to_remove = [(3, 1), (4, 0), (3, 2)]
+        for src, dst in edges_to_remove:
+            g.remove_edge(src, dst)
+            labels.append((src, dst))
+            results.append(g.has_cycle())
+
+        edges_to_add = [(4, 3), (2, 3), (1, 3), (4, 0)]
+        for src, dst in edges_to_add:
+            g.add_edge(src, dst)
+            labels.append((src, dst))
+            results.append(g.has_cycle())
 
         for i in range(len(expected)):
-            with self.subTest(expected[i]):
+            with self.subTest(labels[i]):
                 self.assertEqual(expected[i], results[i])
-
-        self.assertEqual(True, False)
 
 
 class TestDijkstra(unittest.TestCase):
