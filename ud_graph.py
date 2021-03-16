@@ -166,7 +166,24 @@ class UndirectedGraph:
         Return list of vertices visited during BFS search
         Vertices are picked in alphabetical order
         """
-        
+
+        visited = []
+        queue = deque()
+
+        if v_start in self.adj_list:
+            queue.append(v_start)
+
+            while len(queue) > 0:
+                v = queue.popleft()
+                if v not in visited:
+                    visited.append(v)
+                    if v == v_end:
+                        break
+                    for u in sorted(self.adj_list[v]):
+                        if u not in visited:
+                            queue.append(u)
+
+        return visited
 
     def count_connected_components(self):
         """

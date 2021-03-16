@@ -171,11 +171,28 @@ class TestDFS(unittest.TestCase):
 
 class TestBFS(unittest.TestCase):
     def test_something(self):
-        expected = []
+        expected = [['B', 'C', 'D', 'E', 'H', 'A'],
+                    ['C', 'A', 'B', 'D', 'E'],
+                    ['D'],
+                    ['E', 'A', 'B', 'C'],
+                    ['G', 'F', 'Q'],
+                    ['H', 'B', 'C', 'D', 'E', 'A']]
         results = []
+        labels = []
+
+        edges = ['AE', 'AC', 'BE', 'CE', 'CD', 'CB', 'BD', 'ED', 'BH', 'QG', 'FG']
+        g = UndirectedGraph(edges)
+        test_cases = 'ABCDEGH'
+
+        for case in test_cases:
+            labels.append(f'{case} DFS:{g.dfs(case)} BFS:{g.bfs(case)}')
+
+        for i in range(1, len(test_cases)):
+            v1, v2 = test_cases[i], test_cases[-1 - i]
+            results.append(g.bfs(v1, v2))
 
         for i in range(len(expected)):
-            with self.subTest(expected[i]):
+            with self.subTest(labels[i]):
                 self.assertEqual(expected[i], results[i])
 
 
