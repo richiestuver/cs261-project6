@@ -93,9 +93,14 @@ class DirectedGraph:
 
     def get_edges(self) -> []:
         """
-        TODO: Write this implementation
+        Return list of edges as tuples (src, dst, weight)
         """
-        pass
+        edges = []
+        for src in range(len(self.adj_matrix)):
+            for dst in range(len(self.adj_matrix[src])):
+                edges.append((src, dst,self.adj_matrix[src][dst])) if self.adj_matrix[src][dst] != 0 else None
+
+        return edges
 
     def is_valid_path(self, path: []) -> bool:
         """
