@@ -135,22 +135,31 @@ class UndirectedGraph:
 
         return True
 
-        # while len(deq) > 0:
-        #     vertex = deq.popleft()
-        #     try:
-        #         if vertex not in vertices or deq[0] not in self.adj_list[vertex]:
-        #             return False
-        #     except IndexError:
-        #         return False
-
-        return True
-
     def dfs(self, v_start, v_end=None) -> []:
         """
         Return list of vertices visited during DFS search
         Vertices are picked in alphabetical order
         """
-       
+
+        # initialize set of empty vertices visited
+        visited = []
+        stack = deque()
+
+        if v_start in self.adj_list:
+            stack.append(v_start)
+
+            while len(stack) > 0:
+                v = stack.pop()
+                if v not in visited:
+                    visited.append(v)
+                    if v == v_end:
+                        break
+                    for u in sorted(self.adj_list[v],reverse=True):
+                        if u not in visited:
+                            stack.append(u)
+
+        return visited
+
 
     def bfs(self, v_start, v_end=None) -> []:
         """
