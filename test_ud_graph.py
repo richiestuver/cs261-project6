@@ -45,6 +45,20 @@ class TestAddEdge(unittest.TestCase):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
 
+    def test_gs1(self):
+        expected = ["GRAPH: {C: ['J'], J: ['C']}"]
+        results = []
+
+        g = UndirectedGraph()
+        for u, v in ['CJ', 'JC']:
+            g.add_edge(u, v)
+
+        g.add_edge('B', 'B')
+        results.append(str(g))
+
+        for i in range(len(expected)):
+            with self.subTest(expected[i]):
+                self.assertEqual(expected[i], results[i])
 
 class TestRemoveEdge(unittest.TestCase):
     def test_something(self):
@@ -195,6 +209,33 @@ class TestBFS(unittest.TestCase):
             with self.subTest(labels[i]):
                 self.assertEqual(expected[i], results[i])
 
+    def test_gs1(self):
+        expected = [[]]
+        results = []
+
+        graph = UndirectedGraph()
+        g = {
+  'E': ['D', 'F', 'J'],
+  "D": ['E', 'H'],
+  'H': ['A', 'D'],
+  'A': ['H', 'J'],
+  'F': ['E'],
+  'K': ['B'],
+  'B': ['K', 'G'],
+  'J': ['E', 'A'],
+  'G': ['B']}
+
+
+        for v in g:
+            for u in g[v]:
+                graph.add_edge(v, u)
+        print(graph)
+        results.append(graph.bfs('I'))
+        print(graph)
+
+        for i in range(len(expected)):
+            with self.subTest(expected[i]):
+                self.assertEqual(expected[i], results[i])
 
 class TestCountConnected(unittest.TestCase):
     def test_something(self):

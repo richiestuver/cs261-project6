@@ -54,14 +54,14 @@ class UndirectedGraph:
         """
         Add edge to the graph
         """
-
-        if u not in self.adj_list:
-            self.add_vertex(u)
-
-        if v not in self.adj_list:
-            self.add_vertex(v)
-
         if u != v:
+
+            if u not in self.adj_list:
+                self.add_vertex(u)
+
+            if v not in self.adj_list:
+                self.add_vertex(v)
+
             if u not in self.adj_list[v]:
                 self.adj_list[v].append(u)
 
@@ -75,34 +75,28 @@ class UndirectedGraph:
 
         if v in self.adj_list and u in self.adj_list:
 
-            try:
+            if u in self.adj_list[v]:
                 self.adj_list[v].remove(u)
-            except ValueError:
-                return
 
-            try:
+            if v in self.adj_list[u]:
                 self.adj_list[u].remove(v)
-            except ValueError:
-                return
 
     def remove_vertex(self, v: str) -> None:
         """
         Remove vertex and all connected edges
         """
 
-        try:
+        if v in self.adj_list:
             for u in self.adj_list[v][:]:  # create a shallow copy of list. darn mutable sequence, Python!
                 self.remove_edge(v, u)
             del self.adj_list[v]
-        except KeyError:
-            return
 
     def get_vertices(self) -> []:
         """
         Return list of vertices in the graph (any order)
         """
        
-        return list(self.adj_list)
+        return list(self.adj_list.keys())
 
     def get_edges(self) -> []:
         """
