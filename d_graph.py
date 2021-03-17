@@ -206,7 +206,10 @@ class DirectedGraph:
                         if u not in visited:
                             stack.append(u)
                         else:
-                            return True
+                            for w in range(len(self.adj_matrix[u])):
+                                if self.adj_matrix[u][w] != 0:
+                                    if w in visited:
+                                        return True
 
         return False
 

@@ -26,6 +26,7 @@ class TestAddVertex(unittest.TestCase):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
 
+
 class TestAddEdge(unittest.TestCase):
     def test_something(self):
         expected = ["""GRAPH (5 vertices):
@@ -60,6 +61,7 @@ class TestRemoveEdge(unittest.TestCase):
         for i in range(len(expected)):
             with self.subTest(expected[i]):
                 self.assertEqual(expected[i], results[i])
+
 
 class TestGetVertices(unittest.TestCase):
     def test_something(self):
@@ -182,6 +184,20 @@ class TestHasCycle(unittest.TestCase):
             with self.subTest(labels[i]):
                 self.assertEqual(expected[i], results[i])
 
+    def test_gs1(self):
+        expected = [False]
+        results = []
+
+        edges = [(0, 3, 19), (0, 10, 5), (1, 8, 17), (3, 12, 10),
+                 (4, 0, 1), (4, 6, 14), (5, 6, 20), (6, 9, 18),
+                 (6, 10, 14), (10, 8, 12), (10, 12, 15),
+                 (11, 10, 5)]
+
+        g = DirectedGraph(edges)
+        results.append(g.has_cycle())
+        for i in range(len(expected)):
+            with self.subTest(expected[i]):
+                self.assertEqual(expected[i], results[i])
 
 class TestDijkstra(unittest.TestCase):
     def test_something(self):
