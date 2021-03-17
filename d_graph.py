@@ -74,11 +74,8 @@ class DirectedGraph:
         If an edge already exists in the graph, the method will update its weight.
         """
 
-        if src != dst:
-            try:
-                self.adj_matrix[src][dst] = weight
-            except IndexError:
-                return
+        if src != dst and src in range(self.v_count) and dst in range(self.v_count):
+            self.adj_matrix[src][dst] = weight
 
     def remove_edge(self, src: int, dst: int) -> None:
         """
